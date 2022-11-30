@@ -4,4 +4,15 @@
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
     <string name="back4app_app_id">j8cpnfgziUH8pkybnrb1oT3ZmDj7cCykiUJV2JuX</string>
     <string name="back4app_client_key">yCJYJ6hIqcGDxKbv2qmGsVAbX2etzAZh2X0ENVK0</string>
+
+    <string name="sign_Up">Sign Up</string>
+    <string name="e_mail">E-mail</string>
+    <string name="your_name">Your Name</string>
+    <string name="password">Password</string>
+    <string name="i_have_agree_to">   I have agree to</string>
+    <string name="terms_and_services">Terms and Services</string>
+    <string name="create_account">Create account</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="dot_t_have_any_account">Dot\'t have any account?</string>
 </resources>
