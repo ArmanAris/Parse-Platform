@@ -9,6 +9,8 @@ class G : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        Parse.enableLocalDatastore(this)
+
         Parse.initialize(
             Parse.Configuration.Builder(applicationContext)
                 .server(getString(R.string.back4app_server_url))

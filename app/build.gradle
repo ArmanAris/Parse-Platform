@@ -47,6 +47,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
+    // parse platform
     implementation "com.github.parse-community.Parse-SDK-Android:parse:4.1.0"
+
+    // lottie
     implementation 'com.airbnb.android:lottie:5.2.0'
+
+
+
 }
