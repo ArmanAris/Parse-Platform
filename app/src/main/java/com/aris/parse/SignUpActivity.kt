@@ -2,7 +2,7 @@ package com.aris.parse
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
@@ -10,11 +10,19 @@ import android.widget.Toast
 import com.aris.parse.databinding.ActivitySignUpBinding
 import com.aris.parse.ext.CheckNetwork
 import com.parse.ParseUser
+import com.squareup.picasso.Picasso
+import com.yalantis.ucrop.UCrop
+import java.io.File
+import java.util.*
+
 
 const val UserName = "Name"
 
 class SignUpActivity : BaseActivity() {
+
+    lateinit var selectImage: Uri
     private lateinit var binding: ActivitySignUpBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -26,9 +34,23 @@ class SignUpActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            val image = data!!.data
-            Toast.makeText( this,"ok", Toast.LENGTH_SHORT).show()
+            val image:Uri? = data!!.data
+
+            val des: String = StringBuilder(UUID.randomUUID().toString()).toString()
+            UCrop.of(Uri.parse(image.toString()), Uri.fromFile(File(cacheDir, des)))
+                .withAspectRatio(1f, 1f)
+                .withMaxResultSize(2000, 2000).start(this)
         }
+
+        if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            val resultUri:Uri? = UCrop.getOutput(data!!)
+           setImage(resultUri!!)
+
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            Toast.makeText(this, "مشکل در برش عکس", Toast.LENGTH_SHORT).show()
+        }
+
+
     }
 
     fun onClick(view: View) {
@@ -101,5 +123,10 @@ class SignUpActivity : BaseActivity() {
                 Toast.makeText(this, "رفتن به صفحه قوانین", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    fun setImage(uri: Uri) {
+        selectImage = uri
+        Picasso.with(this).load(uri).into(binding.profileImage)
     }
 }
