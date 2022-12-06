@@ -1,5 +1,6 @@
 package com.aris.parse
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,12 +20,27 @@ class SignUpActivity : BaseActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            val image = data!!.data
+            Toast.makeText( this,"ok", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun onClick(view: View) {
 
         when (view.id) {
+            R.id.profile_image -> {
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.type = "image/*"
+                intent.flags = Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+                startActivityForResult(intent, 1)
+            }
+
             R.id.btn_sign_up -> {
                 if (binding.edtNameSignUp.text!!.trim().isEmpty()
                     || binding.edtEmailSignUp.text!!.trim().isEmpty()

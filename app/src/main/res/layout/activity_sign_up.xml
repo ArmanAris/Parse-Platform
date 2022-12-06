@@ -7,23 +7,21 @@
     android:background="@drawable/background"
     tools:context=".SignUpActivity">
 
-    
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
-        android:layout_width="140dp"
-        android:layout_height="104dp"
-        android:layout_marginBottom="24dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:onClick="onClick"
+        android:src="@drawable/ic_baseline_person_24"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/anim_loading" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -107,8 +105,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/white"
-                        android:textSize="13sp"
-                        android:inputType="textEmailAddress"/>
+                        android:inputType="textEmailAddress"
+                        android:textSize="13sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,8 +140,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/white"
-                        android:textSize="13sp"
-                        android:inputType="textPassword"/>
+                        android:inputType="textPassword"
+                        android:textSize="13sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -230,6 +228,20 @@
 
 
     </androidx.cardview.widget.CardView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="140dp"
+        android:layout_height="104dp"
+        android:layout_marginBottom="24dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/anim_loading" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
