@@ -1,6 +1,8 @@
 package com.aris.parse
 
 
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -23,10 +25,20 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val user = ParseUser.getCurrentUser()
+        val file = user.getParseFile("Image")
+        file!!.getDataInBackground(GetDataCallback { data, e ->
+            if (e == null) {
+                val bitmapPic = BitmapFactory.decodeByteArray(data, 0, data.size)
+                binding.profileImage1.setImageBitmap(bitmapPic)
+            }
+        })
 
 
         binding.button.setOnClickListener {
-            downloadTextFile()
+           ParseUser.logOut()
+            startActivity(Intent(this,InSign::class.java))
+            finish()
         }
 
     }
@@ -64,6 +76,7 @@ class MainActivity : BaseActivity() {
         obj3.put("price", 70)
         obj3.put("Play", false)
 
+        obj1.save()
         obj1.saveInBackground()
         obj2.saveInBackground { error ->
             if (error == null) {
@@ -78,6 +91,13 @@ class MainActivity : BaseActivity() {
         // no network
         obj3.saveEventually()
         obj3.saveEventually { }
+
+        obj1.delete()
+        obj1.deleteInBackground()
+        obj1.deleteInBackground {  }
+
+        obj1.deleteEventually()
+        obj1.deleteEventually{ }
 
     }
 
